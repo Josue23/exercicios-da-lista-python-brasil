@@ -268,3 +268,192 @@ def dia_da_semana(entrada):
 
 '''Como usar exercício 13:
 dia_da_semana(1)'''
+
+
+def aprovado_reprovado_duas_notas(nota_1, nota_2):
+    '''Faça um programa que lê as duas notas parciais obtidas por um aluno numa disciplina ao longo de um semestre,
+    e calcule a sua média. A atribuição de conceitos obedece à tabela abaixo:
+
+      Média de Aproveitamento  Conceito
+      Entre 9.0 e 10.0        A
+      Entre 7.5 e 9.0         B
+      Entre 6.0 e 7.5         C
+      Entre 4.0 e 6.0         D
+      Entre 4.0 e zero        E
+
+    O algoritmo deve mostrar na tela as notas, a média, o conceito correspondente e a mensagem “APROVADO” se
+    o conceito for A, B ou C ou “REPROVADO” se o conceito for D ou E. '''
+    media = (nota_1 + nota_2) / 2
+
+    if 9 < media <= 10:
+        conceito = 'A'
+    elif 7.5 < media <= 9:
+        conceito = 'B'
+    elif 6 < media <= 7.5:
+        conceito = 'C'
+    elif 4 < media <= 6:
+        conceito = 'D'
+    elif 0 <= media <= 4:
+        conceito = 'E'
+
+    if conceito in ['A', 'B', 'C']:
+        mensagem = 'APROVADO'
+    else:
+        mensagem = 'REPROVADO'
+
+    print(f'''
+Primeira nota: {nota_1}
+Segunda nota: {nota_2}
+Média: {media}
+Conceito: {conceito}
+Mensagem: {mensagem}
+    ''')
+
+
+def triangulo(lado_a, lado_b, lado_c):
+    '''Faça um Programa que peça os 3 lados de um triângulo. O programa deverá informar se os valores podem ser um
+    triângulo. Indique, caso os lados formem um triângulo, se o mesmo é: equilátero, isósceles ou escaleno.
+
+    Dicas:
+    Três lados formam um triângulo quando a soma de quaisquer dois lados for maior que o terceiro;
+    Triângulo Equilátero: três lados iguais;
+    Triângulo Isósceles: quaisquer dois lados iguais;
+    Triângulo Escaleno: três lados diferentes; '''
+
+    condicao_1 = lado_a + lado_b > lado_c
+    condicao_2 = lado_a + lado_c > lado_b
+    condicao_3 = lado_b + lado_c > lado_a
+
+    if True in [condicao_1, condicao_2, condicao_3]:
+        if lado_a == lado_b == lado_c:
+            return 'Equilátero'
+        elif (lado_a == lado_b) or (lado_a == lado_c) or (lado_b == lado_c):
+            return 'Isósceles'
+        else:
+            return 'Escaleno'
+
+
+'''Como usar exercício 15:
+>>> estrutura_de_decisao.triangulo(2, 0, 3) '''
+
+
+def equacao_segundo_grau(**kwargs):
+    '''Onde testar:
+    https://www.calculadoraonline.com.br/equacao-2-grau'''
+
+    '''Faça um programa que calcule as raízes de uma equação do segundo grau, na forma ax2 + bx + c. O programa deverá
+    pedir os valores de a, b e c e fazer as consistências, informando ao usuário nas seguintes situações:
+
+    Se o usuário informar o valor de A igual a zero, a equação não é do segundo grau e o programa não deve fazer pedir
+    os demais valores, sendo encerrado;
+    Se o delta calculado for negativo, a equação não possui raizes reais. Informe ao usuário e encerre o programa;
+    Se o delta calculado for igual a zero a equação possui apenas uma raiz real; informe-a ao usuário;
+    Se o delta for positivo, a equação possui duas raiz reais; informe-as ao usuário;
+    equação do segundo grau: ax² + bx + c = 0
+    delta: b² - 4ac '''
+    a, b, c = [valor for valor in kwargs.values()]
+    if a == 0:
+        print('Equação do segundo grau não pode ter a == 0')
+        return None
+    else:
+        # descobrindo o delta
+        delta = b ** 2 - 4 * a * c
+        raiz_1 = (-b + (delta ** 0.5)) / (2 * a)
+        raiz_2 = (-b - (delta ** 0.5)) / (2 * a)
+        if delta < 0:
+            print(
+                f'Delta: {delta}. A equação não possui raizes reais porque o delta é negativo.')
+            return None
+        # raiz_1 = (-b + (delta ** 0.5)) / (2 * a)
+        # raiz_2 = (-b - (delta ** 0.5)) / (2 * a)
+
+        elif delta == 0:
+            print(f'Delta: {delta}, Raiz: {raiz_1}')
+        else:
+            print(f'''
+    Delta: {delta}
+    Primeira raiz: {raiz_1}
+    Segunda raiz: {raiz_2}''')
+
+
+'''Como usar exercício 16:
+>>> valores = {'a': 1, 'b': -6, 'c': 5}
+>>> equacao_segundo_grau(**valores)'''
+
+
+def ano_bissexto(ano):
+    '''Faça um Programa que peça um número correspondente a um determinado ano e em seguida informe se este ano é ou
+    não bissexto.'''
+
+    bissexto = ano % 4 == 0 and ano % 400 == 0
+
+    if bissexto:
+        return f'{ano}: bissexto.'
+    else:
+        return f'{ano}: não bissexto.'
+
+
+'''Como usar exercício 17:
+>>> ano_bissexto(2000)'''
+
+
+def data_valida(data):
+    '''Faça um Programa que peça uma data no formato dd/mm/aaaa e determine se a mesma é uma data válida. '''
+
+    lista_de_datas = data.split('/')
+    lista_de_datas = [int(data) for data in lista_de_datas]
+    dia, mes, ano = [x for x in lista_de_datas]
+
+    if dia in range(32) and mes in range(1, 13) and ano in range(-5000, 5000):
+        dia in range(32)
+        mes in range(1, 13)
+        ano in range(-5000, 5000)
+        return dia, mes, ano
+
+
+'''Como usar exercício 18:
+>>> data_valida('23/09/1989')'''
+
+
+def centenas_dezenas_unidades(entrada: int):
+    '''Faça um Programa que leia um número inteiro menor que 1000 e imprima a quantidade de centenas, dezenas e
+    unidades do mesmo.
+    Observando os termos no plural a colocação do "e", da vírgula entre outros. Exemplo:
+    326 = 3 centenas, 2 dezenas e 6 unidades
+    12 = 1 dezena e 2 unidades Testar com: 326, 300, 100, 320, 310,305, 301, 101, 311, 111, 25, 20, 10, 21, 11, 1, 7 e
+    16 '''
+    assert entrada < 1000, f"{entrada} não é menor que 1000"
+    centena = 100
+    dezena = 10
+
+    centenas = entrada // centena
+    restante = entrada % centena
+
+    dezenas = restante // dezena
+    restante = restante % dezena
+
+    unidades = restante
+
+    '''Python Ternary operator'''
+    centenas_str = 'centenas' if centenas != 1 else 'centena'
+    dezenas_str = 'dezenas' if dezenas != 1 else 'dezena'
+    unidades_str = 'unidades' if unidades != 1 else 'unidade'
+
+    print(f'{centenas} {centenas_str}, {dezenas} {dezenas_str} e {unidades} {unidades_str}')
+
+
+'''Como usar exercício 18:
+>>> centenas_dezenas_unidades(326)'''
+
+
+def aprovado_reprovado_tres_notas(nota_1, nota_2, nota_3):
+    '''Faça um Programa para leitura de três notas parciais de um aluno. O programa deve calcular a média alcançada por
+    aluno e presentar:
+
+    A mensagem "Aprovado", se a média for maior ou igual a 7, com a respectiva média alcançada;
+    A mensagem "Reprovado", se a média for menor do que 7, com a respectiva média alcançada;
+    A mensagem "Aprovado com Distinção", se a média for igual a 10. '''
+    media = (nota_1 + nota_2 + nota_3) / 3
+    resultado = 'Aprovado com Distinção' if media == 10 else 'Reprovado' if media < 7 else 'Aprovado'
+
+    return nota_1, nota_2, nota_3, media, resultado
